@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namescape :api do
-    resouces :users, only: %i[create]
-    resouce :session, only: %i[create destroy]
+  namespace :api do
+    resources :users, only: %i[create]
+    resource :session, only: %i[create destroy]
   end
 end
