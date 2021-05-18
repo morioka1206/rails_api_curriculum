@@ -4,13 +4,15 @@ module Jwt::UserAuthenticator
   def call(request_headers)
     @request_headers = request_headers
     begin
-      payload, _ = Jwt::TokenDecryptor.(token)
-      return User.find(payload['user_id'])
-    rescue
-      return nil
+      payload, _ = Jwt::TokenDecryptor.call(token)
+      User.find(payload['user_id'])
+    rescue StandardError
+      nil
     end
   end
 
+  private
+  
   def token
     @request_headers['Authorization'].split(' ').last
   end
