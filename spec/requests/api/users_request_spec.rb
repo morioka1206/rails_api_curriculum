@@ -5,7 +5,7 @@ RSpec.describe "Api::Users", type: :request do
     let(:user_params) { { user: { name: 'dyson', email: 'dyson@example.com', password: '12345678', password_confirmation: '12345678'} } } 
     it 'ユーザーが作成できること' do
       post api_users_path, params: user_params
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(200)
       json = JSON.parse(response.body)
       expect(json['user']).to include({
                                           'id' => be_present,
