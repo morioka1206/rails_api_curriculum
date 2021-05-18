@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namescape :api do
+    resouces :users, only: %i[create]
+    resouce :session, only: %i[create destroy]
+  end
 end
