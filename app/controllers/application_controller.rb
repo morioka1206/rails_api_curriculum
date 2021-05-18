@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  class authenticationError < StandardError; end
+  class AuthenticationError < StandardError; end
 
-  rescue_from ActiveRecord::RecordInvalid, with: render_422
+  rescue_from ActiveRecord::RecordInvalid, with: :render_422
   rescue_from AuthenticationError, with: :not_authenticated
 
   def authenticate
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= Jwt::UserAuthenticator.call(request.headers)
   end
 
-  praivate
+  private
 
   def render_422(exception)
     render json: { error: {messages: exception.record.errors.full_messages} }, status: :unprocessable_entity
