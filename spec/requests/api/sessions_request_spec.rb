@@ -9,12 +9,12 @@ RSpec.describe "Api::Sessions", type: :request do
         post api_session_path, params: session_params
         expect(responce).to have_http_status(201)
         json = JSON.parse(response.body)
-        expect(json['user']).to eq({
+        expect(json['user']).to include({
                                         'id' => user.id,
                                         'name' => user.name,
                                         'email' => user.email,
+                                        'token' => be_present
                                   })
-        expect(json['token']).to be_present  
       end
     end
 
