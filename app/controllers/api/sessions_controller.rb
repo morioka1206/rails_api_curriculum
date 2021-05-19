@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
       token = Jwt::TokenProvider.call(user_id: user.id)
       render json: ActiveModelSerializers::SerializableResource.new(user, serializer: UserSerializer).as_json.deep_merge(user: { token: token})
     else
-      render json: { error: { messages: ['メールアドレスまたはパスワードに誤りがあります。']}, status: :unauthorized }
+      render json: { error: { messages: ['メールアドレスまたはパスワードに誤りがあります。'] } }, status: :unauthorized
     end
   end
 
