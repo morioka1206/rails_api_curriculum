@@ -23,7 +23,6 @@ require 'factory_bot'
 #
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
-<% if RSpec::Rails::FeatureCheck.has_active_record_migration? -%>
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -32,9 +31,7 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
-<% end -%>
 RSpec.configure do |config|
-<% if RSpec::Rails::FeatureCheck.has_active_record? -%>
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -46,18 +43,6 @@ RSpec.configure do |config|
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
-<% else -%>
-  # Remove this line to enable support for ActiveRecord
-  config.use_active_record = false
-
-  # If you enable ActiveRecord support you should unncomment these lines,
-  # note if you'd prefer not to run each example within a transaction, you
-  # should set use_transactional_fixtures to false.
-  #
-  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  # config.use_transactional_fixtures = true
-
-<% end -%>
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
