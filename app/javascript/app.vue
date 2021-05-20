@@ -18,7 +18,7 @@
             <v-list-item-title @click="logout">ログアウト</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="login" link v-else>
+        <v-list-item to="/login" link v-else>
           <v-list-item-action>
             <v-icon>mdi-account</v-icon>
           </v-list-item-action>
@@ -35,13 +35,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col class="text-center">
-            <router-view></router-view>
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view></router-view>
     </v-main>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2019</span>

@@ -6,7 +6,7 @@
                 <v-col
                         cols="12"
                         sm="8"
-                        md="4">
+                        md="6">
                     <v-card class="elevation-12">
                         <v-card-text>
 
@@ -53,9 +53,9 @@
                         </v-card-text>
 
                         <v-card-actions>
-                            <v-btn color="indigo" @click="signup">新規登録</v-btn>
-                            <v-spacer></v-spacer>
                             <router-link to="/login" class="text-decoration-none">ログインページへ</router-link>
+                            <v-spacer></v-spacer>
+                            <v-btn color="indigo" @click="signup">新規登録</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
