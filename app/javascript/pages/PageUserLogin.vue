@@ -44,7 +44,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
     export default {
         data: () => ({
             email: '',
@@ -63,12 +62,13 @@
             async login() {
                 if(this.$refs.form.validate()) {
                     try {
-                        await axios.post(`/api/session`, {
+                        const sessionParams = {
                             session: {
                                 email: this.email,
                                 password: this.password
                             }
-                        })
+                        }
+                        await this.$store.dispatch('auth/login', sessionParams)
                         this.$router.push(`/`)
                     } catch(error) {
                         alert(error.response.data.error.messages)
