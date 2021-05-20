@@ -34,7 +34,7 @@
 
                                 <v-text-field
                                         v-model="password"
-                                        :rules="passwordConfirmationRules"
+                                        :rules="passwordRules"
                                         label="Password"
                                         required
                                         prepend-icon="mdi-lock"
@@ -42,7 +42,7 @@
                                 ></v-text-field>
 
                                 <v-text-field
-                                        v-model="passwordConfirmation"
+                                        v-model="passwordConfirmationRules"
                                         label="PasswordConfirmation"
                                         required
                                         prepend-icon="mdi-lock"
@@ -87,8 +87,16 @@
                     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
                 ]
             },
+            passwordRules() {
+              return [
+                v => !!v || 'Password is required',
+                ]
+            },
             passwordConfirmationRules() {
-                return [this.password === this.passwordConfirmation || 'Password must match']
+                return [
+                  v => !!v || 'PasswordConfirmation is required',
+                  this.password === this.passwordConfirmation || 'Password must match'
+                  ]
             }
         },
 
