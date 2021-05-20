@@ -53,7 +53,7 @@
                         </v-card-text>
 
                         <v-card-actions>
-                            <v-btn color="primary" @click="signup">新規登録</v-btn>
+                            <v-btn color="indigo" @click="signup">新規登録</v-btn>
                             <v-spacer></v-spacer>
                             <router-link to="/login" class="text-decoration-none">ログインページへ</router-link>
                         </v-card-actions>
