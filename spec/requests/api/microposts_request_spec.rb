@@ -11,6 +11,8 @@ RSpec.describe "Api::Microposts", type: :request do
         include(
             'id' => micropost.id,
             'content' => micropost.content,
+            'created_at' => be_present,
+            'updated_at' => be_present,
             'user' => include('id' => micropost.user.id)
         )
       })
@@ -30,6 +32,8 @@ RSpec.describe "Api::Microposts", type: :request do
         expect(json['micropost']).to include({
                                                  'id' => be_present,
                                                  'content' => 'hoge',
+                                                 'created_at' => be_present,
+                                                 'updated_at' => be_present,
                                                  'user' => include('id' => user.id)
                                              })
       end
@@ -47,6 +51,22 @@ RSpec.describe "Api::Microposts", type: :request do
     end
   end
 
+  describe 'GET /api/microposts/:id' do
+    let(:micropost) { create(:micropost) }
+    it 'マイクロポストの詳細を取得できること' do
+      get api_micropost_path(micropost)
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json['micropost']).to include({
+                                               'id' => micropost.id,
+                                               'content' => micropost.content,
+                                               'created_at' => be_present,
+                                               'updated_at' => be_present,
+                                               'user' => include('id' => micropost.user.id)
+                                           })
+    end
+  end
+
   describe 'PATCH /api/microposts/:id' do
     let(:user) { create(:user) }
     let(:token) { Jwt::TokenProvider.call(user_id: user.id) }
@@ -61,6 +81,8 @@ RSpec.describe "Api::Microposts", type: :request do
         expect(json['micropost']).to include({
                                                  'id' => be_present,
                                                  'content' => 'hoge',
+                                                 'created_at' => be_present,
+                                                 'updated_at' => be_present,
                                                  'user' => include('id' => user.id)
                                              })
       end
@@ -91,6 +113,8 @@ RSpec.describe "Api::Microposts", type: :request do
         expect(json['micropost']).to include({
                                                  'id' => be_present,
                                                  'content' => 'hoge',
+                                                 'created_at' => be_present,
+                                                 'updated_at' => be_present,
                                                  'user' => include('id' => user.id)
                                              })
       end

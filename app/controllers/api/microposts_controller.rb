@@ -11,6 +11,11 @@ class Api::MicropostsController < ApplicationController
     render json: micropost, serializer: MicropostSerializer, status: :created
   end
 
+  def show
+    micropost = current_user.microposts.find(params[:id])
+    render json: micropost, serializer: MicropostSerializer
+  end
+
   def update
     micropost = current_user.microposts.find(params[:id])
     micropost.update!(micropost_params)
