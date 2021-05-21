@@ -27,7 +27,7 @@ RSpec.describe "Api::Microposts", type: :request do
     context 'ログイン済みの場合' do
       it 'ユーザーが作成できること' do
         post api_microposts_path, params: micropost_params, headers: headers
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(200)
         json = JSON.parse(response.body)
         expect(json['micropost']).to include({
                                                  'id' => be_present,
@@ -108,7 +108,7 @@ RSpec.describe "Api::Microposts", type: :request do
     context 'ログイン済みの場合' do
       it 'ユーザーが作成できること' do
         post api_microposts_path, params: micropost_params, headers: headers
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(200)
         json = JSON.parse(response.body)
         expect(json['micropost']).to include({
                                                  'id' => be_present,
